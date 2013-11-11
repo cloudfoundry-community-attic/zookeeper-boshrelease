@@ -1,6 +1,6 @@
 ---
 name: zookeeper-solo
-director_uuid: f2d9ab6e-aa1a-41de-8be2-61dd10243d70
+director_uuid: DIRECTOR_UUID
 releases:
 - name: zookeeper
   version: latest
