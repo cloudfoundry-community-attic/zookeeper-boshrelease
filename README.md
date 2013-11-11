@@ -24,3 +24,25 @@ sed -i '' -e "s/DIRECTOR_UUID/$(bosh status | grep UUID | awk '{print $2}')/" lo
 bosh deployment local-cluster.yml
 bosh -n deploy
 ```
+
+Then you can ping any of the servers to confirm they are OK:
+
+```
+$ bosh vms
++-------------+---------+---------------+-------------+
+| Job/index   | State   | Resource Pool | IPs         |
++-------------+---------+---------------+-------------+
+| zookeeper/0 | running | common        | 10.244.0.6  |
+| zookeeper/1 | running | common        | 10.244.0.10 |
+| zookeeper/2 | running | common        | 10.244.0.14 |
++-------------+---------+---------------+-------------+
+
+$ echo ruok | nc 10.244.0.6 2181
+imok
+
+$ echo ruok | nc 10.244.0.10 2181
+imok
+
+$ echo ruok | nc 10.244.0.14 2181
+imok
+```
