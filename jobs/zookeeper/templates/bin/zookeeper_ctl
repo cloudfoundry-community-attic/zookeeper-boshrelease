@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Setup env vars and folders for the webapp_ctl script
+source /var/vcap/jobs/zookeeper/helpers/ctl_setup.sh 'zookeeper'
+
+export LANG=en_US.UTF-8
+export PIDFILE=/var/vcap/store/zookeeper/zookeeper_server.pid
+export ZOOPIDFILE=$PIDFILE
+
+export ZOOCFGDIR=$JOB_DIR/config
+export ZOO_DATADIR=/var/vcap/store/zookeeper
+export ZOO_LOG_DIR=/var/vcap/sys/log/zookeeper
+
+case $1 in
+
+  start)
+
+    # dataDir
+    mkdir -p $ZOO_DATADIR
+    cp $ZOOCFGDIR/myid $ZOO_DATADIR/
+
+    # dataLogDir
+    mkdir -p $ZOO_LOG_DIR
+
+    exec zkServer.sh start
+
+    ;;
+
+  stop)
+    exec zkServer.sh stop
+
+    ;;
+  *)
+    echo "Usage: zookeeper_ctl {start|stop}"
+
+    ;;
+
+esac
+exit 0

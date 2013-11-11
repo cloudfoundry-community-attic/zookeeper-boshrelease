@@ -1,1 +1,11 @@
---- {}
+---
+java/openjdk-1.6.0_27.tar.gz:
+  object_id: 8d607c81-3878-42ab-a3e5-03f0bd43da6b
+  sha: !binary |-
+    YTQ1YjZmODliYTU0ZDIzMGNiNDc5OTJiZDgxNzdkMjExZjY0YmQ5Mw==
+  size: 28917046
+zookeeper/zookeeper-3.4.5.tar.gz:
+  object_id: cf069eab-9535-45d6-9856-cb1a99c27c18
+  sha: !binary |-
+    ZmQ5MjE1NzVlMDI0Nzg5MDk1NTcwMzRlYTkyMmRlODcxOTI2ZWZjNw==
+  size: 16402010

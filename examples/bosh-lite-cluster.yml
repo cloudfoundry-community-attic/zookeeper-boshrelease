@@ -1,0 +1,72 @@
+---
+name: zookeeper-cluster
+director_uuid: f2d9ab6e-aa1a-41de-8be2-61dd10243d70
+releases:
+- name: zookeeper
+  version: latest
+compilation:
+  workers: 3
+  network: zookeeper-network
+  reuse_compilation_vms: true
+  cloud_properties:
+    name: random
+update:
+  canaries: 1
+  max_in_flight: 4
+  canary_watch_time: 10000-60000
+  update_watch_time: 10000-60000
+resource_pools:
+- name: common
+  network: zookeeper-network
+  size: 3
+  stemcell:
+    name: bosh-stemcell
+    version: latest
+  cloud_properties:
+    name: random
+networks:
+- name: zookeeper-network
+  subnets:
+<% (0..28).each_with_index do |i| %>
+  - range: 10.244.0.<%= i*4 %>/30
+    reserved:
+      - 10.244.0.<%= i*4 + 1 %>
+    static:
+      - 10.244.0.<%= i*4 + 2 %>
+    cloud_properties:
+      name: random
+<% end %>
+<% (29..61).each_with_index do |i| %>
+  - range: 10.244.0.<%= i*4 %>/30
+    reserved:
+      - 10.244.0.<%= i*4 + 1 %>
+    cloud_properties:
+      name: random
+<% end %>
+<% (62..63).each_with_index do |i| %>
+  - range: 10.244.0.<%= i*4 %>/30
+    reserved:
+      - 10.244.0.<%= i*4 + 1 %>
+    static:
+      - 10.244.0.<%= i*4 + 2 %>
+    cloud_properties:
+      name: random
+<% end %>
+jobs:
+- name: zookeeper
+  template: zookeeper
+  instances: 3
+  resource_pool: common
+  networks:
+  - name: zookeeper-network
+    static_ips:
+    - 10.244.0.6
+    - 10.244.0.10
+    - 10.244.0.14
+properties:
+  zookeeper:
+    servers:
+      - 10.244.0.6
+      - 10.244.0.10
+      - 10.244.0.14
+    secret: 0CD82648-3A68-45A5-B1D7-8D4DA2BFCB06

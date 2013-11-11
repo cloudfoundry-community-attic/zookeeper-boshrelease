@@ -1,0 +1,5 @@
+---
+name: java6
+dependencies: {}
+files:
+- java/openjdk-1.6.0_27.tar.gz
