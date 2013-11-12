@@ -1,0 +1,28 @@
+---
+packages:
+- name: java6
+  version: 1
+  sha1: !binary |-
+    Njg1ODkyYWJjOGI5NWFjYzYzMjI5NThkZjY3YmU0NGI1NDg3NDYyZA==
+  fingerprint: !binary |-
+    YWJhMmFhNTUyY2RhMTYwMzAwNTcyNThlZTkyYjA5ZTQ2MDcwZDMwMA==
+  dependencies: []
+- name: zookeeper
+  version: 1
+  sha1: !binary |-
+    OWYxY2JlYmY4MzMwOTI2ZDU1ZGE2NGM4ZDFiMGFiYzA5MDkzMWIwZg==
+  fingerprint: !binary |-
+    ZTZlMTYzNTVlMTJiMzg1MDU5Njg5NjA5MmQwYmVjYWUwMWY0NDdkNQ==
+  dependencies:
+  - java6
+jobs:
+- name: zookeeper
+  version: 1
+  fingerprint: !binary |-
+    MTMwYjAwZDZkYTFjZmYwMzM1NWY2MzNkYjc3YTI4NGZlMmRiZjdlZQ==
+  sha1: !binary |-
+    OTM2NTEzZDY2YzBmNWYyMThkZjRjOTJkZTUwOTY0OTRiODM5ZGU5YQ==
+commit_hash: 15c00b25
+uncommitted_changes: true
+name: zookeeper
+version: 1
