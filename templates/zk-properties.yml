@@ -1,0 +1,8 @@
+meta:
+  environment: ~
+
+properties:
+  zookeeper:
+    servers: (( merge ))
+    secret: (( merge ))
+

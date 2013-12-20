@@ -1,0 +1,13 @@
+networks: (( merge ))
+
+meta:
+  environment: ~
+
+jobs:
+  - name: zookeeper_z1
+    template: zookeeper
+    instances: 0
+    resource_pool: small_z1
+    networks:
+      - name: zookeeper1
+        static_ips: ~

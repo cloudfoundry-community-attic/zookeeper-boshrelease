@@ -1,0 +1,9 @@
+---
+name: NAME
+director_uuid: PLACEHOLDER-DIRECTOR-UUID
+releases:
+  - name: zookeeper
+    version: latest
+properties:
+  zookeeper:
+    secret: 0CD82648-3A68-45A5-B1D7-8D4DA2BFCB06
