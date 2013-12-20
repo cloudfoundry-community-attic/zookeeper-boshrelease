@@ -13,9 +13,14 @@ update:
 
 jobs:
   - name: zookeeper_z1
-    instances: 3
+    instances: 1
     networks:
-      - name: default
+      - name: zookeeper1
+
+properties:
+  zookeeper:
+    servers:
+      - (( "0.zookeeper_z1.zookeeper1." meta.environment ".microbosh" ))
 
 compilation:
   cloud_properties:
@@ -34,4 +39,4 @@ networks:
     type: dynamic
     cloud_properties:
       security_groups:
-      - default
+        - default

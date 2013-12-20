@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 infrastructure=$1
 template_prefix="zk"
 shift
@@ -14,6 +16,7 @@ fi
 BOSH_STATUS=$(bosh status)
 DIRECTOR_UUID=$(echo "$BOSH_STATUS" | grep UUID | awk '{print $2}')
 DIRECTOR_CPI=$(echo "$BOSH_STATUS" | grep CPI | awk '{print $2}')
+DIRECTOR_NAME=$(echo "$BOSH_STATUS" | grep Name | awk '{print $2}')
 NAME=$template_prefix-$infrastructure
 
 if [[ $infrastructure = "warden" ]]; then
@@ -43,7 +46,7 @@ tmpdir=$release/tmp
 
 mkdir -p $tmpdir
 cp $templates/$template_prefix-stub-spiff.yml $tmpdir/stub-with-uuid.yml
-echo $DIRECTOR_UUID
+echo $DIRECTOR_NAME $DIRECTOR_CPI $DIRECTOR_UUID
 perl -pi -e "s/PLACEHOLDER-DIRECTOR-UUID/$DIRECTOR_UUID/g" $tmpdir/stub-with-uuid.yml
 perl -pi -e "s/NAME/$NAME/g" $tmpdir/stub-with-uuid.yml
 
